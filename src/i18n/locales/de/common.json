@@ -1,0 +1,13 @@
+{
+  "signIn": "Sign in",
+  "signUp": "Create account",
+  "email": "Email",
+  "password": "Password",
+  "logout": "Logout",
+  "language": "Language",
+  "darkMode": "Dark mode",
+  "lightMode": "Light mode",
+  "items_one": "{{count}} item",
+  "items_other": "{{count}} items",
+  "back": "Back"
+}

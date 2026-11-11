@@ -1,0 +1,10 @@
+export const displayStyle = ` text-4xl leading-[44px] font-bold `;
+export const h1Style = ` text-3xl leading-[38px] font-bold `;
+export const h2Style = ` text-2xl leading-[32px] font-bold `; 
+export const h3Style = ` text-xl leading-[28px] font-semibold `; 
+export const titleStyle = ` text-lg leading-[26px] font-semibold `; 
+export const bodyStyle = ` text-base leading-6 font-normal `; 
+export const bodySmallStyle = ` text-sm leading-[22px] font-normal `; 
+export const captionStyle = ` text-xs leading-[18px] font-normal `; 
+export const buttonStyle = ` text-base leading-5 font-semibold `; 
+export const labelStyle = ` text-sm leading-[18px] font-medium `;

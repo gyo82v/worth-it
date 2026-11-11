@@ -164,3 +164,7 @@ Android SDK           Installed
 Java                  Android Studio JBR
 Development Build     Working ✅
 Physical Device       Connected ✅
+
+20. install icons:
+
+npx expo install @expo/vector-icons
