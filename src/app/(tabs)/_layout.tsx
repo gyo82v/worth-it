@@ -1,80 +1,45 @@
-import { Tabs } from "expo-router";
-import Ionicons from "@expo/vector-icons/Ionicons";
-
+import { NativeTabs } from 'expo-router/native-tabs';
 import { useTheme } from "@/theme";
 
 export default function TabsLayout() {
   const { theme } = useTheme();
 
   return (
-    <Tabs
-      screenOptions={{
-        headerShown: false,
-
-        tabBarActiveTintColor: theme.primary,
-        tabBarInactiveTintColor: theme.muted,
-
-        tabBarStyle: {
-          backgroundColor: theme.surface,
-          borderTopColor: theme.divider,
-        },
-      }}
+    <NativeTabs
+      tintColor={theme.primary}
+      backgroundColor={theme.surface}
+      indicatorColor={theme.divider}
+      rippleColor={theme.divider}
     >
-      <Tabs.Screen
-        name="index"
-        options={{
-          title: "Home",
-          tabBarIcon: ({ color, focused }) => (
-            <Ionicons
-              name={focused ? "home-sharp" : "home-outline"}
-              color={color}
-              size={24}
-            />
-          ),
-        }}
-      />
+      <NativeTabs.Trigger name="index">
+        <NativeTabs.Trigger.Label>Home</NativeTabs.Trigger.Label>
+        <NativeTabs.Trigger.Icon 
+          md="home"
+          sf={{ default: 'house', selected: 'house.fill' }}
+        />
+      </NativeTabs.Trigger>
+      <NativeTabs.Trigger name="history">
+        <NativeTabs.Trigger.Label>History</NativeTabs.Trigger.Label>
+        <NativeTabs.Trigger.Icon 
+          sf={{ default: 'clock', selected: 'clock.fill' }}
+          md="history"
+        />
+      </NativeTabs.Trigger>
+      <NativeTabs.Trigger name="compare">
+        <NativeTabs.Trigger.Label>Compare</NativeTabs.Trigger.Label>
+        <NativeTabs.Trigger.Icon
+          sf={{ default: 'arrow.left.arrow.right.circle', selected: 'arrow.left.arrow.right.circle.fill' }}
+          md="compare_arrows"
+        />
+      </NativeTabs.Trigger>
 
-      <Tabs.Screen
-        name="history"
-        options={{
-          title: "History",
-          tabBarIcon: ({ color, focused }) => (
-            <Ionicons
-              name={focused ? "time-sharp" : "time-outline"}
-              color={color}
-              size={24}
-            />
-          ),
-        }}
-      />
-
-      <Tabs.Screen
-        name="compare"
-        options={{
-          title: "Compare",
-          tabBarIcon: ({ color, focused }) => (
-            <Ionicons
-              name={focused ? "git-compare" : "git-compare-outline"}
-              color={color}
-              size={24}
-            />
-          ),
-        }}
-      />
-
-      <Tabs.Screen
-        name="profile"
-        options={{
-          title: "Profile",
-          tabBarIcon: ({ color, focused }) => (
-            <Ionicons
-              name={focused ? "person" : "person-outline"}
-              color={color}
-              size={24}
-            />
-          ),
-        }}
-      />
-    </Tabs>
+      <NativeTabs.Trigger name="profile">
+        <NativeTabs.Trigger.Label>Profile</NativeTabs.Trigger.Label>
+        <NativeTabs.Trigger.Icon
+          sf={{ default: 'person', selected: 'person.fill' }}
+          md="person"
+        />
+      </NativeTabs.Trigger>
+    </NativeTabs>
   );
 }
