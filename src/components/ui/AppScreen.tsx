@@ -33,8 +33,10 @@ export default function AppScreen({
 
   return (
     <SafeAreaView
-      className="flex-1"
-      style={{ backgroundColor: theme.background }}
+      style={{
+    flex: 1,
+    backgroundColor: theme.background,
+  }}
       edges={["top", "bottom"]}
     >
       {scrollable ? (

@@ -1,23 +1,14 @@
-import { AppScreen, AppText, Card } from "@/components/ui";
+import { Text, View } from "react-native";
+import AppScreen from "@/components/ui/AppScreen";
 
-export default function Index() {
+export default function History() {
   return (
     <AppScreen center>
-       <Card>
-         <AppText variant="display" align="center" color="primary">
-        History here
-      </AppText>
-      <AppText
-        variant="body"
-        align="center"
-       style={{
-                marginTop: 8,
-            }}
-        color="muted"
-      >
-       Check your past worth it calculations here
-      </AppText>
-       </Card>
+      <View style={{ backgroundColor: "#ffffff", padding: 24 }}>
+        <Text style={{ color: "#000000", fontSize: 24 }}>
+          AppScreen works!
+        </Text>
+      </View>
     </AppScreen>
   );
 }

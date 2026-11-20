@@ -1,3 +1,19 @@
+import { View, Text } from "react-native";
+
+export default function Index() {
+  return (
+    <View className="flex-1 items-center justify-center bg-red-500">
+      <Text className="text-2xl font-bold text-white">
+        NativeWind works!
+      </Text>
+    </View>
+  );
+}
+
+
+
+/*
+
 import { ScrollView, View } from "react-native";
 
 import {
@@ -18,7 +34,7 @@ export default function Index() {
         contentContainerClassName="gap-6 py-6"
         showsVerticalScrollIndicator={false}
       >
-        {/* Header */}
+
         <View className="gap-2">
           <AppText variant="display">
             Worth It
@@ -46,7 +62,7 @@ export default function Index() {
           </View>
         </View>
 
-        {/* Theme buttons */}
+  
         <Card variant="outlined">
           <View className="gap-4">
             <AppText variant="h3">
@@ -75,7 +91,7 @@ export default function Index() {
           </View>
         </Card>
 
-        {/* Typography */}
+   
         <Card>
           <View className="gap-3">
             <AppText variant="h2">
@@ -119,7 +135,7 @@ export default function Index() {
           </View>
         </Card>
 
-        {/* Cards */}
+   
         <View className="gap-3">
           <AppText variant="h2">
             Cards
@@ -165,7 +181,7 @@ export default function Index() {
           </Card>
         </View>
 
-        {/* Buttons */}
+ 
         <Card>
           <View className="gap-4">
             <AppText variant="h2">
@@ -218,7 +234,7 @@ export default function Index() {
           </View>
         </Card>
 
-        {/* Semantic colors */}
+
         <Card variant="outlined">
           <View className="gap-3">
             <AppText variant="h3">
@@ -247,35 +263,6 @@ export default function Index() {
           </View>
         </Card>
       </ScrollView>
-    </AppScreen>
-  );
-}
-
-
-/*
-import { AppScreen, AppText, Card } from "@/components/ui";
-import { useTranslation } from "react-i18next";
-
-export default function Index() {
-  const { t } = useTranslation();
-  return (
-    <AppScreen center>
-       <Card>
-         <AppText variant="display" align="center" color="primary">
-        Worth It 🚀
-      </AppText>
-      <AppText
-        variant="body"
-        align="center"
-       style={{
-                marginTop: 8,
-                
-            }}
-        color="muted"
-      >
-        {t("test")}
-      </AppText>
-       </Card>
     </AppScreen>
   );
 }

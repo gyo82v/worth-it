@@ -50,6 +50,12 @@ const typographyStyles = {
   label: labelStyle,
 };
 
+const alignmentStyles = {
+  left: "text-left",
+  center: "text-center",
+  right: "text-right",
+} as const;
+
 export default function AppText({
   children,
   variant = "body",
@@ -61,7 +67,7 @@ export default function AppText({
 
   return (
     <Text
-      className={`${typographyStyles[variant]} text-${align}`}
+      className={`${typographyStyles[variant]} ${alignmentStyles[align]}`}
       style={[
         {
           color: theme[color],
