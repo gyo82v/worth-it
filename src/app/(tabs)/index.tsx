@@ -1,12 +1,14 @@
-import { View, Text } from "react-native";
+import { AppScreen, AppText, Card } from "@/components/ui";
 
 export default function Index() {
   return (
-    <View className="flex-1 items-center justify-center bg-red-500">
-      <Text className="text-2xl font-bold text-white">
-        NativeWind works!
-      </Text>
-    </View>
+    <AppScreen>
+      <Card>
+        <AppText align="center" variant="display" color="primary">
+          index page, add quick and advanced evaluation
+        </AppText>
+      </Card>
+    </AppScreen>
   );
 }
 
