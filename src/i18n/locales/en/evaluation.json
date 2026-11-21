@@ -1,1 +1,11 @@
-{}
+{
+  "start": "Get started",
+  "quick": {
+    "title": "Quick Evaluation",
+    "description": "Get a quick estimate of what you really earn per hour using just a few essential details about your job."
+  },
+  "advanced": {
+    "title": "Advanced Evaluation",
+    "description": "Get a more detailed picture of your work by considering income, expenses, working hours and additional factors."
+  }
+}
