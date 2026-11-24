@@ -386,3 +386,18 @@ The actual result should only include scores for areas that are selected and val
 - [ ] Which Advanced Evaluation factors are most valuable to add next?
 
 **V1 principle:** Build the simplest transparent version, test it with different types of jobs and user priorities, then adjust the scoring rules based on what the results actually communicate.
+
+
+
+1 Finalise TypeScript data models – preferences, evaluation inputs, area results and overall result.
+2 Build calculation functions – financial earnings, learning score, 
+  satisfaction score, weighted total   and final verdict.
+3 Write calculation tests – verify formulas, weights, missing values and edge cases.
+4 Build the personalisation screen – main goal, priorities, optional hourly target and currency.
+5 Build the Quick Evaluation form – Financial, Learning and Satisfaction, 
+  with clear rating descriptions.
+6 Build the results screen – three separate area results plus overall score and verdict.
+  Include Save and Share actions on the results page.
+7 Implement data persistence – registered-user preferences and saved evaluation 
+  snapshots, while keeping guest access. Persist saved evaluations for registered users.
+8 Test the complete flow – different priorities, excluded areas, financial scenarios and comparisons
