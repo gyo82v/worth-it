@@ -51,7 +51,8 @@ export type EvaluationPreferences = {
     minimumHourlyEarnings: number | null;
 
     // Areas the user wants to evaluate.
-    includedAreas: OptionalEvaluationArea[];
+    includedOptionalAreas: OptionalEvaluationArea[];
+    includeAreas: EvaluationArea[]
 
     // Importance of each area, expressed as percentages.
     // Excluded areas must have a weight of 0.
