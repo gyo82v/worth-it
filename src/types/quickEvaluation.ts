@@ -13,7 +13,6 @@ export type EvaluationGoal =
     | "careerGrowth"
     | "satisfaction"
     | "balanced"
-    | "custom";
 
 export type EvaluationPeriod = "week" | "month" | "year";
 
@@ -52,7 +51,6 @@ export type EvaluationPreferences = {
 
     // Areas the user wants to evaluate.
     includedOptionalAreas: OptionalEvaluationArea[];
-    includeAreas: EvaluationArea[]
 
     // Importance of each area, expressed as percentages.
     // Excluded areas must have a weight of 0.
