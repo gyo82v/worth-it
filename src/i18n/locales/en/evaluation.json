@@ -1,8 +1,302 @@
+
 {
   "start": "Get started",
+  "common": {
+    "financial": "Financial",
+    "learning": "Learning",
+    "satisfaction": "Satisfaction",
+    "currency": "Currency",
+    "required": "Required",
+    "optional": "Optional",
+    "included": "Included",
+    "notIncluded": "Not included",
+    "yes": "Yes",
+    "no": "No",
+    "notApplicable": "Not applicable"
+  },
   "quick": {
     "title": "Quick Evaluation",
-    "description": "Get a quick estimate of what you really earn per hour using just a few essential details about your job."
+    "description": "Get a quick estimate of what you really earn per hour using just a few essential details about your job.",
+    "setup": {
+      "navigationTitle": "Personalise",
+      "title": "Let's personalise your evaluation",
+      "description": "Choose what matters most to you. You can keep the default settings and start straight away.",
+      "mainPriority": "What matters most to you?",
+      "balanced": {
+        "title": "Everything equally",
+        "description": "Give Financial, Learning and Satisfaction equal importance."
+      },
+      "choosePriority": "OR PRIORITISE ONE AREA",
+      "goals": {
+        "money": {
+          "title": "Money"
+        },
+        "careerGrowth": {
+          "title": "Career growth"
+        },
+        "satisfaction": {
+          "title": "Satisfaction"
+        }
+      },
+      "additionalAreas": "Additional areas",
+      "additionalAreasDescription": "Both areas are included by default. Turn off anything you don't want to evaluate.",
+      "learningDescription": "Skills and career development.",
+      "satisfactionDescription": "Colleagues, management and work-life balance.",
+      "priorityIncluded": "Included because this is your main priority.",
+      "financialTarget": "Minimum acceptable hourly earnings",
+      "financialTargetDescription": "How much must you earn per hour for a job to meet your financial expectations?",
+      "minimumEarnings": "Minimum earnings per hour",
+      "targetPlaceholder": "e.g. 12.00",
+      "targetOptional": "Optional. Leave empty if you don't have a target.",
+      "invalidHourlyTarget": "Enter a valid amount greater than zero.",
+      "start": "Start evaluation"
+    },
+
+"financial": {
+  "title": "Financial",
+  "description": "Calculate what you really earn for the time you commit to this job.",
+  "period": {
+    "label": "Evaluation period",
+    "week": "Week",
+    "month": "Month",
+    "year": "Year",
+    "helper": "Use the same period for all amounts and hours."
+  },
+  "amountsNote": "All amounts are in {{currency}}.",
+  "income": {
+    "label": "Take-home income",
+    "placeholder": "e.g. 2500.00",
+    "helper": "Total income after taxes, including salary, bonuses, tips and commissions."
+  },
+  "benefits": {
+    "label": "Additional benefits",
+    "placeholder": "e.g. 100.00",
+    "helper": "Optional. Estimated value of free meals, accommodation or other benefits."
+  },
+  "expenses": {
+    "label": "Job-related expenses",
+    "placeholder": "e.g. 150.00",
+    "helper": "Optional. Travel, additional food, equipment and other costs caused by this job."
+  },
+  "hours": {
+    "label": "Total committed hours",
+    "placeholder": "e.g. 180",
+    "helper": "Include actual work, commuting and any required work at home."
+  },
+  "validation": {
+    "invalidAmount": "Enter a valid amount using up to two decimal places.",
+    "invalidHours": "Enter a number of hours greater than zero."
+  }
+},
+"learning": {
+      "title": "Learning and career growth",
+      "description": "Evaluate what this job offers for your professional development.",
+      "questions": {
+        "skillDevelopment": {
+          "title": "How much are you learning new skills?",
+          "helper": "Consider skills that could also be useful in other jobs.",
+          "scale": {
+            "1": {
+              "label": "None",
+              "description": "The job provides no meaningful opportunity to learn new skills."
+            },
+            "2": {
+              "label": "Little",
+              "description": "You occasionally learn something, but most tasks are repetitive."
+            },
+            "3": {
+              "label": "Some",
+              "description": "You learn some useful skills, but opportunities are inconsistent."
+            },
+            "4": {
+              "label": "A lot",
+              "description": "You regularly develop skills that are useful beyond this job."
+            },
+            "5": {
+              "label": "Extensive",
+              "description": "The job provides excellent opportunities to develop valuable and transferable skills."
+            }
+          }
+        },
+        "careerRelevance": {
+          "title": "How relevant is this job to your career goals?",
+          "helper": "Consider experience, qualifications and future career opportunities.",
+          "scale": {
+            "1": {
+              "label": "Unrelated",
+              "description": "The job has no meaningful connection to your career interests or future plans."
+            },
+            "2": {
+              "label": "Slightly",
+              "description": "The job offers very limited experience that could help your career."
+            },
+            "3": {
+              "label": "Somewhat",
+              "description": "The job provides some useful experience, but its relevance to your career is limited."
+            },
+            "4": {
+              "label": "Relevant",
+              "description": "The job provides valuable experience that supports your career direction."
+            },
+            "5": {
+              "label": "Very relevant",
+              "description": "The job strongly supports your career goals and provides highly relevant experience."
+            }
+          }
+        },
+        "networking": {
+          "title": "How much opportunity do you have to meet useful professional contacts?",
+          "helper": "Think about people who could help you learn, develop or progress professionally.",
+          "scale": {
+            "1": {
+              "label": "None",
+              "description": "You have virtually no opportunity to meet useful professional contacts."
+            },
+            "2": {
+              "label": "Limited",
+              "description": "You occasionally meet new people, but meaningful professional connections are unlikely."
+            },
+            "3": {
+              "label": "Some",
+              "description": "You have some opportunities to meet people who may be useful for your career."
+            },
+            "4": {
+              "label": "Good",
+              "description": "You regularly meet people who can offer useful professional connections."
+            },
+            "5": {
+              "label": "Excellent",
+              "description": "The job offers excellent opportunities to build valuable professional relationships."
+            }
+          }
+        }
+      },
+      "academic": {
+        "title": "Academic requirements",
+        "description": "These answers provide additional context and don't affect your Learning score.",
+        "credits": "Does this job count towards required academic credits?",
+        "curriculum": "Do you need this job to fulfil a course or curriculum requirement?"
+      },
+      "validation": {
+        "required": "Please select a rating or Not applicable."
+      }
+    },
+
+"satisfaction": {
+  "title": "Job satisfaction",
+  "description": "Evaluate your everyday working experience and wellbeing.",
+  "questions": {
+    "colleagues": {
+      "title": "How friendly and supportive are your colleagues?",
+      "helper": "Think about cooperation, respect and how people treat you at work.",
+      "scale": {
+        "1": {
+          "label": "Very poor",
+          "description": "Interactions are often disrespectful or hostile, making it difficult to work comfortably."
+        },
+        "2": {
+          "label": "Poor",
+          "description": "Colleagues are rarely helpful or welcoming, and cooperation is limited."
+        },
+        "3": {
+          "label": "Mixed",
+          "description": "Some colleagues are supportive, but the overall experience is inconsistent."
+        },
+        "4": {
+          "label": "Good",
+          "description": "Colleagues are generally friendly, respectful and willing to help."
+        },
+        "5": {
+          "label": "Excellent",
+          "description": "Colleagues consistently create a welcoming, respectful and collaborative environment."
+        }
+      }
+    },
+    "management": {
+      "title": "How supportive is the management?",
+      "helper": "Consider communication, fairness, respect and availability when you need support.",
+      "scale": {
+        "1": {
+          "label": "Very poor",
+          "description": "Management is often disrespectful, unavailable or unclear about expectations."
+        },
+        "2": {
+          "label": "Poor",
+          "description": "Support and communication are limited, and concerns are rarely addressed."
+        },
+        "3": {
+          "label": "Mixed",
+          "description": "Management is adequate at times, but support and communication are inconsistent."
+        },
+        "4": {
+          "label": "Good",
+          "description": "Management communicates clearly, treats people respectfully and provides support."
+        },
+        "5": {
+          "label": "Excellent",
+          "description": "Management is consistently respectful, approachable, fair and supportive."
+        }
+      }
+    },
+    "workLifeBalance": {
+      "title": "How good is your work-life balance?",
+      "helper": "Consider whether your working hours leave enough time for your personal life and responsibilities.",
+      "scale": {
+        "1": {
+          "label": "Very poor",
+          "description": "Work regularly takes over your personal time, leaving little room for rest or other responsibilities."
+        },
+        "2": {
+          "label": "Poor",
+          "description": "Schedules or workload frequently interfere with your personal life."
+        },
+        "3": {
+          "label": "Mixed",
+          "description": "You can usually manage personal commitments, but work sometimes creates significant strain."
+        },
+        "4": {
+          "label": "Good",
+          "description": "Work generally fits around your personal life, with enough time to rest and manage other commitments."
+        },
+        "5": {
+          "label": "Excellent",
+          "description": "Working hours are predictable and leave you with a healthy balance and good control over your personal time."
+        }
+      }
+    },
+    "stressManageability": {
+      "title": "How manageable is the stress and workload?",
+      "helper": "Consider how often work feels overwhelming and whether you have enough support and recovery time.",
+      "scale": {
+        "1": {
+          "label": "Overwhelming",
+          "description": "Stress feels constant and difficult to manage; workload regularly exceeds what you can handle."
+        },
+        "2": {
+          "label": "High",
+          "description": "Work often feels stressful, and it is difficult to recover between demanding periods."
+        },
+        "3": {
+          "label": "Moderate",
+          "description": "Stress is present but generally manageable, although busy periods can be challenging."
+        },
+        "4": {
+          "label": "Manageable",
+          "description": "Most demands are manageable, and you usually have enough support and recovery time."
+        },
+        "5": {
+          "label": "Very manageable",
+          "description": "Work rarely causes excessive stress; demands feel reasonable and well supported."
+        }
+      }
+    }
+  },
+  "validation": {
+    "required": "Please select a rating or Not applicable."
+  }
+}
+
+
   },
   "advanced": {
     "title": "Advanced Evaluation",

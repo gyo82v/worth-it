@@ -120,21 +120,10 @@ export function calculateFinancialAreaResult(
 
     validateNonNegative(input.incomeAfterTax, "Income");
     validateNonNegative(input.benefitsValue, "Benefits");
-    validateNonNegative(input.jobExpenses, "Job expenses");
+    validateNonNegative(input.jobExpenses, "Job expenses"); 
+    validateNonNegative(input.totalCommittedHours,"Total committed hours");
 
-    const hours = [
-        input.hours.work,
-        input.hours.commuting,
-        input.hours.workingAtHome,
-        input.hours.other,
-    ];
-
-    hours.forEach((value) => validateNonNegative(value, "Working hours"));
-
-    const totalHours = hours.reduce(
-        (total, value) => total + value,
-        0
-    );
+    const totalHours = input.totalCommittedHours;
 
     if (totalHours <= 0) {
         throw new Error("Total committed hours must be greater than zero.");
@@ -381,12 +370,11 @@ export function calculateQuickEvaluationResult(
     // Create snapshots to prevent later preference or input changes
     // from altering the completed evaluation.
     const inputSnapshot: QuickEvaluationInput = {
-        ...input,
-        financial: {
-            ...input.financial,
-            hours: { ...input.financial.hours },
-        },
-    };
+    ...input,
+    financial: {
+        ...input.financial,
+    },
+};
 
     if (!preferences.includedOptionalAreas.includes("learning")) {
         delete inputSnapshot.learning;

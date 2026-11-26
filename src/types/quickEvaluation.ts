@@ -82,12 +82,7 @@ export type FinancialInput = {
     jobExpenses: number;
 
     // All hours refer to the same selected period.
-    hours: {
-        work: number;
-        commuting: number;
-        workingAtHome: number;
-        other: number;
-    };
+    totalCommittedHours: number;
 };
 
 
@@ -224,6 +219,40 @@ export type QuickEvaluationShareOptions = {
     // Whether to include actual hourly earnings
     // in the generated share summary.
     includeHourlyEarnings: boolean;
+};
+
+
+
+// ============================================
+// QUICK EVALUATION FORM VALUES
+// ============================================
+
+// Form values remain strings while the user is typing.
+// They are validated before being converted to numbers.
+
+export type QuickEvaluationFormValues = {
+    financial: {
+        period: EvaluationPeriod;
+        incomeAfterTax: string;
+        benefitsValue: string;
+        jobExpenses: string;
+        totalCommittedHours: string;
+    };
+
+    learning?: {
+        skillDevelopment: RatingAnswer | null;
+        careerRelevance: RatingAnswer | null;
+        networking: RatingAnswer | null;
+        requiredForCredits: RequirementAnswer;
+        requiredForCurriculum: RequirementAnswer;
+    };
+
+    satisfaction?: {
+        colleagues: RatingAnswer | null;
+        management: RatingAnswer | null;
+        workLifeBalance: RatingAnswer | null;
+        stressManageability: RatingAnswer | null;
+    };
 };
 
 

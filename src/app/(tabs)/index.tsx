@@ -31,7 +31,7 @@ export default function Index() {
             title={tEvaluation("quick.title")}
             description={tEvaluation("quick.description")}
             actionLabel={tEvaluation("start")}
-            onPress={() => router.push("/evaluation/quick")}
+            onPress={() => router.push("/evaluation/quick-setup")}
           />
 
           <EvaluationOptionCard

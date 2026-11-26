@@ -16,14 +16,14 @@ import Card from "./Card";
 export interface SelectableCardProps {
     title: string;
     description?: string;
-
-    // Optional icon supplied by the parent.
     icon?: ReactNode;
 
     selected: boolean;
     onPress: () => void;
 
     disabled?: boolean;
+
+    layout?: "horizontal" | "vertical";
 
     accessibilityLabel?: string;
     testID?: string;
@@ -39,12 +39,43 @@ export default function SelectableCard({
     selected,
     onPress,
     disabled = false,
+    layout = "horizontal",
     accessibilityLabel,
     testID,
     style,
 }: SelectableCardProps) {
 
     const { theme } = useTheme();
+
+    const isVertical = layout === "vertical";
+
+    const indicator = (
+        <View
+            className="h-[18px] w-[18px] items-center justify-center rounded-full border"
+            style={{
+                backgroundColor: selected
+                    ? theme.primary
+                    : "transparent",
+                borderColor: selected
+                    ? theme.primary
+                    : theme.border,
+            }}
+        >
+            {selected && (
+                <AppText
+                    variant="caption"
+                    color="onPrimary"
+                    style={{
+                        fontSize: 10,
+                        lineHeight: 14,
+                        fontWeight: "700",
+                    }}
+                >
+                    ✓
+                </AppText>
+            )}
+        </View>
+    );
 
     return (
         <Pressable
@@ -59,7 +90,11 @@ export default function SelectableCard({
             testID={testID}
             style={({ pressed }) => [
                 {
-                    opacity: pressed && !disabled ? 0.8 : disabled ? 0.5 : 1,
+                    opacity: pressed && !disabled
+                        ? 0.8
+                        : disabled
+                            ? 0.5
+                            : 1,
                 },
                 style,
             ]}
@@ -67,28 +102,62 @@ export default function SelectableCard({
             <Card
                 variant="outlined"
                 style={{
-                    flexDirection: "row",
+                    position: "relative",
+
+                    flexDirection: isVertical ? "column" : "row",
+
                     alignItems: "center",
-                    gap: 12,
+
+                    justifyContent: isVertical
+                        ? "center"
+                        : "flex-start",
+
+                    gap: isVertical ? 8 : 12,
+
+                    // Fixed dimensions for vertical cards.
+                    height: isVertical ? 112 : undefined,
+
+                    paddingVertical: isVertical ? 10 : 16,
+                    paddingHorizontal: isVertical ? 6 : 16,
+
+                    // Selection must not change card dimensions.
+                    borderWidth: 1.5,
+
                     backgroundColor: selected
                         ? theme.surfaceSecondary
                         : theme.surface,
+
                     borderColor: selected
                         ? theme.primary
                         : theme.border,
-                    borderWidth: selected ? 1.5 : 1,
                 }}
             >
-                {/* Optional icon */}
+
+                {/* Icon */}
                 {icon && (
                     <View>
                         {icon}
                     </View>
                 )}
 
+
                 {/* Title and description */}
-                <View className="flex-1 gap-1">
-                    <AppText variant="title">
+                <View
+                    className={isVertical
+                        ? "w-full items-center"
+                        : "flex-1 gap-1"
+                    }
+                >
+                    <AppText
+                        variant={isVertical ? "bodySmall" : "title"}
+                        align={isVertical ? "center" : "left"}
+                        style={isVertical ? {
+                            fontSize: 12,
+                            lineHeight: 16,
+                            fontWeight: "600",
+                            letterSpacing: -0.2,
+                        } : undefined}
+                    >
                         {title}
                     </AppText>
 
@@ -96,39 +165,32 @@ export default function SelectableCard({
                         <AppText
                             variant="bodySmall"
                             color="muted"
+                            align={isVertical ? "center" : "left"}
                         >
                             {description}
                         </AppText>
                     )}
                 </View>
 
+
                 {/* Selection indicator */}
-                <View
-                    className="h-5 w-5 items-center justify-center rounded-full border"
-                    style={{
-                        backgroundColor: selected
-                            ? theme.primary
-                            : "transparent",
-                        borderColor: selected
-                            ? theme.primary
-                            : theme.border,
-                    }}
-                >
-                    {selected && (
-                        <AppText
-                            variant="caption"
-                            color="onPrimary"
-                            style={{
-                                fontSize: 12,
-                                lineHeight: 16,
-                            }}
-                        >
-                            ✓
-                        </AppText>
-                    )}
-                </View>
+                {isVertical ? (
+                    <View
+                        pointerEvents="none"
+                        style={{
+                            position: "absolute",
+                            top: 8,
+                            right: 8,
+                        }}
+                    >
+                        {indicator}
+                    </View>
+                ) : (
+                    indicator
+                )}
 
             </Card>
         </Pressable>
     );
 }
+

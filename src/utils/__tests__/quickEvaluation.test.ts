@@ -10,12 +10,7 @@ const validFinancialInput: FinancialInput = {
     incomeAfterTax: 2000,
     benefitsValue: 100,
     jobExpenses: 300,
-    hours: {
-        work: 160,
-        commuting: 20,
-        workingAtHome: 0,
-        other: 0,
-    },
+    totalCommittedHours: 180,
 };
 
 describe("calculateFinancialAreaResult", () => {
@@ -74,12 +69,7 @@ describe("calculateFinancialAreaResult", () => {
     it("throws an error when total hours are zero", () => {
         const input: FinancialInput = {
             ...validFinancialInput,
-            hours: {
-                work: 0,
-                commuting: 0,
-                workingAtHome: 0,
-                other: 0,
-            },
+            totalCommittedHours: 180,
         };
 
         expect(() =>
