@@ -16,6 +16,7 @@ import { useTranslation } from "react-i18next";
 import {
     AppScreen,
     AppText,
+    Button,
 } from "@/components/ui";
 
 import FinancialSection from "./quick/FinancialSection";
@@ -24,17 +25,61 @@ import SatisfactionSection from "./quick/SatisfactionSection";
 
 import { useQuickEvaluationFlow } from "@/providers/QuickEvaluationFlowProvider";
 
-import type { QuickEvaluationFormValues } from "@/types/quickEvaluation";
+import { calculateQuickEvaluationResult } from "@/utils/quickEvaluation";
+
+import type {
+    QuickEvaluationFormValues,
+    QuickEvaluationInput,
+    RatingAnswer,
+} from "@/types/quickEvaluation";
 
 
 // ============================================
-// VALIDATION
+// FINANCIAL VALIDATION
 // ============================================
 
 const decimalPattern = /^\d+(?:[.,]\d{1,2})?$/;
 
+
+const requiredAmountSchema = z.string()
+    .trim()
+    .refine(
+        (value) => decimalPattern.test(value),
+        { message: "invalidAmount" }
+    )
+    .transform(
+        (value) => Number(value.replace(",", "."))
+    );
+
+
+const optionalAmountSchema = z.string()
+    .trim()
+    .refine(
+        (value) => value === "" || decimalPattern.test(value),
+        { message: "invalidAmount" }
+    )
+    .transform(
+        (value) => value === ""
+            ? 0
+            : Number(value.replace(",", "."))
+    );
+
+
+const hoursSchema = z.string()
+    .trim()
+    .refine(
+        (value) =>
+            decimalPattern.test(value) &&
+            Number(value.replace(",", ".")) > 0,
+        { message: "invalidHours" }
+    )
+    .transform(
+        (value) => Number(value.replace(",", "."))
+    );
+
+
 // ============================================
-// LEARNING VALIDATION
+// RATING VALIDATION
 // ============================================
 
 const ratingAnswerSchema = z.union([
@@ -44,16 +89,27 @@ const ratingAnswerSchema = z.union([
     z.literal(4),
     z.literal(5),
     z.literal("notApplicable"),
-]).nullable().refine(
-    (value) => value !== null,
-    { message: "required" }
-);
+])
+    .nullable()
+    .refine(
+        (value) => value !== null,
+        { message: "required" }
+    )
+    .transform(
+        (value) => value as RatingAnswer
+    );
+
 
 const requirementSchema = z.enum([
     "yes",
     "no",
     "notApplicable",
 ]);
+
+
+// ============================================
+// LEARNING VALIDATION
+// ============================================
 
 const learningSchema = z.object({
 
@@ -68,6 +124,7 @@ const learningSchema = z.object({
     requiredForCurriculum: requirementSchema,
 
 });
+
 
 // ============================================
 // SATISFACTION VALIDATION
@@ -86,34 +143,11 @@ const satisfactionSchema = z.object({
 });
 
 
-const requiredAmountSchema = z.string()
-    .trim()
-    .refine(
-        (value) => decimalPattern.test(value),
-        { message: "invalidAmount" }
-    );
+// ============================================
+// COMPLETE FORM SCHEMA
+// ============================================
 
-
-const optionalAmountSchema = z.string()
-    .trim()
-    .refine(
-        (value) =>
-            value === "" || decimalPattern.test(value),
-        { message: "invalidAmount" }
-    );
-
-
-const hoursSchema = z.string()
-    .trim()
-    .refine(
-        (value) =>
-            decimalPattern.test(value) &&
-            Number(value.replace(",", ".")) > 0,
-        { message: "invalidHours" }
-    );
-
-
-const quickEvaluationSchema = z.object({
+const quickEvaluationBaseSchema = z.object({
 
     financial: z.object({
 
@@ -128,10 +162,15 @@ const quickEvaluationSchema = z.object({
         totalCommittedHours: hoursSchema,
 
     }),
+
     learning: learningSchema.optional(),
+
     satisfaction: satisfactionSchema.optional(),
+
 });
 
+type QuickEvaluationFormOutput =
+    z.output<typeof quickEvaluationBaseSchema>;
 
 
 // ============================================
@@ -144,7 +183,10 @@ export default function QuickEvaluation() {
 
     const { t } = useTranslation("evaluation");
 
-    const { preferences } = useQuickEvaluationFlow();
+    const {
+        preferences,
+        setResult,
+    } = useQuickEvaluationFlow();
 
 
     // ========================================
@@ -161,15 +203,53 @@ export default function QuickEvaluation() {
 
 
     // ========================================
+    // VALIDATION
+    // ========================================
+
+    const quickEvaluationSchema =
+        quickEvaluationBaseSchema.superRefine((values, ctx) => {
+
+            if (
+                preferences?.includedOptionalAreas.includes("learning") &&
+                !values.learning
+            ) {
+                ctx.addIssue({
+                    code: "custom",
+                    path: ["learning"],
+                    message: "Learning input is required.",
+                });
+            }
+
+            if (
+                preferences?.includedOptionalAreas.includes("satisfaction") &&
+                !values.satisfaction
+            ) {
+                ctx.addIssue({
+                    code: "custom",
+                    path: ["satisfaction"],
+                    message: "Satisfaction input is required.",
+                });
+            }
+
+        });
+
+
+    // ========================================
     // FORM
     // ========================================
 
-    const methods = useForm<QuickEvaluationFormValues>({
+    const methods = useForm<
+        QuickEvaluationFormValues,
+        unknown,
+        QuickEvaluationFormOutput
+    >({
+
         resolver: zodResolver(quickEvaluationSchema),
 
         mode: "onBlur",
 
         defaultValues: {
+
             financial: {
                 period: "month",
                 incomeAfterTax: "",
@@ -177,30 +257,89 @@ export default function QuickEvaluation() {
                 jobExpenses: "",
                 totalCommittedHours: "",
             },
-             learning: preferences?.includedOptionalAreas.includes("learning")
-        ? {
-            skillDevelopment: null,
-            careerRelevance: null,
-            networking: null,
-            requiredForCredits: "notApplicable",
-            requiredForCurriculum: "notApplicable",
-        }
-        : undefined,
-        satisfaction: preferences?.includedOptionalAreas.includes("satisfaction")
-    ? {
-        colleagues: null,
-        management: null,
-        workLifeBalance: null,
-        stressManageability: null,
-    }
-    : undefined,
+
+            learning: preferences?.includedOptionalAreas.includes("learning")
+                ? {
+                    skillDevelopment: null,
+                    careerRelevance: null,
+                    networking: null,
+                    requiredForCredits: "notApplicable",
+                    requiredForCurriculum: "notApplicable",
+                }
+                : undefined,
+
+            satisfaction: preferences?.includedOptionalAreas.includes("satisfaction")
+                ? {
+                    colleagues: null,
+                    management: null,
+                    workLifeBalance: null,
+                    stressManageability: null,
+                }
+                : undefined,
+
         },
-        
     });
 
 
     if (!preferences) {
         return null;
+    }
+
+
+    // ========================================
+    // FORM SUBMISSION
+    // ========================================
+
+    function onSubmit(values: QuickEvaluationFormOutput) {
+        if (!preferences) {
+          router.replace("/evaluation/quick-setup");
+          return;
+        }
+
+        // Convert the validated form values into our evaluation model.
+        const input: QuickEvaluationInput = {
+
+            financial: {
+                period: values.financial.period,
+                incomeAfterTax: values.financial.incomeAfterTax,
+                benefitsValue: values.financial.benefitsValue,
+                jobExpenses: values.financial.jobExpenses,
+                totalCommittedHours: values.financial.totalCommittedHours,
+            },
+
+        };
+
+
+        // Add Learning only when included.
+        if (
+            preferences.includedOptionalAreas.includes("learning") &&
+            values.learning
+        ) {
+            input.learning = values.learning;
+        }
+
+
+        // Add Satisfaction only when included.
+        if (
+            preferences.includedOptionalAreas.includes("satisfaction") &&
+            values.satisfaction
+        ) {
+            input.satisfaction = values.satisfaction;
+        }
+
+
+        // Calculate the complete result.
+        const result = calculateQuickEvaluationResult(
+            input,
+            preferences
+        );
+
+
+        // Store it for the Results screen.
+        setResult(result);
+
+        // Navigate to Results.
+        router.push("/evaluation/quick-results");
     }
 
 
@@ -230,16 +369,33 @@ export default function QuickEvaluation() {
                     </View>
 
 
-                    {/* Financial section */}
+                    {/* Financial */}
                     <FinancialSection
                         currency={preferences.currency}
                     />
+
+
+                    {/* Learning */}
                     {preferences.includedOptionalAreas.includes("learning") && (
-                     <LearningSection />
+                        <LearningSection />
                     )}
+
+
+                    {/* Satisfaction */}
                     {preferences.includedOptionalAreas.includes("satisfaction") && (
-                      <SatisfactionSection />
+                        <SatisfactionSection />
                     )}
+
+
+                    {/* Submit */}
+                    <Button
+                        fullWidth
+                        size="lg"
+                        onPress={methods.handleSubmit(onSubmit)}
+                    >
+                        {t("quick.submit")}
+                    </Button>
+
                 </View>
 
             </AppScreen>
@@ -248,5 +404,6 @@ export default function QuickEvaluation() {
 
     );
 }
+
 
 

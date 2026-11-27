@@ -12,6 +12,7 @@ export default function RootLayout() {
       <Stack>
         <Stack.Screen name="(tabs)" options={{headerShown: false}} />
         <Stack.Screen name="evaluation/quick" />
+        <Stack.Screen name="evaluation/quick-results" />
         <Stack.Screen name="evaluation/advanced" />
       </Stack>
       <StatusBar style="light" />

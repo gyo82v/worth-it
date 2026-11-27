@@ -15,6 +15,7 @@
     "notApplicable": "Not applicable"
   },
   "quick": {
+    "submit": "Calculate evaluation",
     "title": "Quick Evaluation",
     "description": "Get a quick estimate of what you really earn per hour using just a few essential details about your job.",
     "setup": {
@@ -294,7 +295,56 @@
   "validation": {
     "required": "Please select a rating or Not applicable."
   }
+},
+
+"results": {
+  "title": "Your evaluation results",
+  "overall": {
+    "title": "Your overall result",
+    "score": "Overall score",
+    "unavailable": "Overall score unavailable",
+    "targetMissing": "Set a minimum hourly earnings target in your preferences to calculate your overall score.",
+    "areaUnavailable": "An included area has no applicable ratings. Exclude that area or provide an applicable rating.",
+    "basedOn": "Based on your personal priorities"
+  },
+  "verdicts": {
+    "notWorthIt": "Not worth it!",
+    "probablyNotWorthIt": "Probably not worth it",
+    "mixed": "It depends",
+    "worthIt": "Worth it!",
+    "definitelyWorthIt": "Definitely worth it!"
+  },
+  "financial": {
+    "title": "Financial",
+    "hourlyEarnings": "Effective net hourly earnings",
+    "score": "Financial score",
+    "targetMissing": "No financial target set",
+    "netEarnings": "Net earnings after job expenses",
+    "totalHours": "Total committed hours"
+  },
+  "learning": {
+    "title": "Learning and career growth",
+    "average": "Average rating",
+    "noRatings": "No applicable ratings"
+  },
+  "satisfaction": {
+    "title": "Job satisfaction",
+    "average": "Average rating",
+    "noRatings": "No applicable ratings"
+  },
+  "weight": "Weight: {{value}}%",
+  "share": {
+    "title": "Share your result",
+    "description": "Share a summary of your job evaluation.",
+    "includeHourlyEarnings": "Include actual hourly earnings",
+    "privacyNote": "Hourly earnings are excluded by default to protect your financial privacy.",
+    "button": "Share result",
+    "copied": "Result copied to clipboard.",
+    "unavailable": "Sharing is unavailable in this browser."
+  },
+  "newEvaluation": "Evaluate another job"
 }
+
 
 
   },
