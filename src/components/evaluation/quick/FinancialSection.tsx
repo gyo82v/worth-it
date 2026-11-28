@@ -42,9 +42,7 @@ export default function FinancialSection({
     return (
         <View className="gap-4">
 
-            {/* ================================= */}
             {/* SECTION INTRODUCTION */}
-            {/* ================================= */}
 
             <View className="gap-1">
 
@@ -77,9 +75,7 @@ export default function FinancialSection({
             </View>
 
 
-            {/* ================================= */}
             {/* EVALUATION PERIOD */}
-            {/* ================================= */}
 
             <View className="gap-2">
 
